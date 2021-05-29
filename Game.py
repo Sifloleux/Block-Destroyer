@@ -33,12 +33,15 @@ def get_speed(starting_point,pointer_point):
         speed = [0,1]
     return speed
 
+
+
+
 class Balls(pygame.sprite.Sprite):
 
     def __init__(self,startpos):
         #inicjalizuj klasę bazową Sprite
         pygame.sprite.Sprite.__init__(self)
-        self.image = loadImage("ball.png",True)
+        self.image = loadImage("../IMAGES/ball.png",True)
         self.rect = self.image.get_rect()
         self.rect.center = x
         self.speed = SPEED
@@ -47,7 +50,8 @@ class Balls(pygame.sprite.Sprite):
         if self.rect.bottom <= SCREEN_HEIGHT:
             self.kill()
 
-
+#def launch(number_of_balls):
+    
 #----------------------------
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -59,7 +63,7 @@ clock = pygame.time.Clock()
 running = True
 shoot=0
 
-
+number_of_balls=1
 draw_line=0
 
 Balls_container = pygame.sprite.RenderClear()
@@ -85,7 +89,10 @@ while running:
                 draw_line = 0
                 if  shoot !=1:
                     shoot = 1
-                                
+                    for i in range(number_of_balls):
+                        Balls_container.add(Balls(x))
+                    number_of_balls=+1   
+                    
         elif event.type == pygame.MOUSEMOTION:
             if mouse_draging:
                 mouse_x, mouse_y = event.pos
