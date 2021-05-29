@@ -76,21 +76,26 @@ while running:
                 mouse_draging = True
                 mouse_x, mouse_y = event.pos             
                 draw_line = 1
+                
         elif event.type == pygame.MOUSEBUTTONUP:
-            if event.button == 1 and shoot !=1:            
+            if event.button == 1:            
                 mouse_draging = False
                 y[0] = y[0]
                 y[1] = y[1]
                 draw_line = 0
-                shoot = 1
-                
-                
+                if  shoot !=1:
+                    shoot = 1
+                                
         elif event.type == pygame.MOUSEMOTION:
             if mouse_draging:
                 mouse_x, mouse_y = event.pos
                 y[0] = mouse_x
                 y[1] = mouse_y
-
+                draw_line = 1
+        else:
+            draw_line = 0
+            
+            
     screen.fill(WHITE)
     pygame.draw.circle(screen, RED, [x[0],x[1]],5)
    # if shoot ==1:
