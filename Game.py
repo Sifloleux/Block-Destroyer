@@ -11,7 +11,7 @@ WHITE = (255, 255, 255)
 RED   = (255, 0, 0)
 BLACK = (0, 0, 0)
 FPS = 60
-SHOOTING_SPEED = 6
+SHOOTING_SPEED = 16
 SPEED = [0, 0]
 BLOCK_MOVEMENT = SCREEN_WIDTH/10
 
@@ -66,10 +66,10 @@ def add_ball(mouse_position, SHOOTING_SPEED,starting_point):
 
 def add_block_line(SCREEN_WIDTH,difficulty):
         if difficulty <= 5:
+            print(difficulty)
             samples = random.sample(range(10),3)
             for i in samples:   
-                print(samples)
-                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
                 all_blocks_list.add(block)
@@ -77,7 +77,7 @@ def add_block_line(SCREEN_WIDTH,difficulty):
             print(difficulty)
             samples = random.sample(range(10),4)
             for i in samples:       
-                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
                 all_blocks_list.add(block)
@@ -85,14 +85,14 @@ def add_block_line(SCREEN_WIDTH,difficulty):
             print(difficulty)
             samples = random.sample(range(10),6)
             for i in samples: 
-                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
                 all_blocks_list.add(block)
         else:
             samples = random.sample(range(10),8)
             for i in samples: 
-                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
                 all_blocks_list.add(block)
@@ -125,7 +125,35 @@ class Block(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image.fill(BLACK)
         self.image.set_colorkey(BLACK)
-        pygame.draw.rect(self.image, color, [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])        
+        if hp <= 5:
+            pygame.draw.rect(self.image, (11, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 10:
+            pygame.draw.rect(self.image, (115, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 15:
+            pygame.draw.rect(self.image, (206, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 20:
+            pygame.draw.rect(self.image, (252, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 25:
+            pygame.draw.rect(self.image, (252, 211, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 30:
+            pygame.draw.rect(self.image, (252, 152, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 35:
+            pygame.draw.rect(self.image, (252, 115, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 40:
+            pygame.draw.rect(self.image, (252, 86, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 45:
+            pygame.draw.rect(self.image, (252, 61, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 50:
+            pygame.draw.rect(self.image, (252, 3, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 55:
+            pygame.draw.rect(self.image, (163, 5, 5), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 60:
+            pygame.draw.rect(self.image, (87, 2, 2), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 65:
+            pygame.draw.rect(self.image, (43, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 70:
+            pygame.draw.rect(self.image, (0, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+
         self.rect = self.image.get_rect()
         #self.rect.bottom.
     
@@ -134,7 +162,36 @@ class Block(pygame.sprite.Sprite):
         if self.hp <=0:
              self.kill()
              
-             
+    def update_color_num(self,hp):
+        if hp <= 5:
+            self.color = (11, 252, 3)
+        elif hp  <= 10:
+            self.color = (115, 252, 3)
+        elif hp  <= 15:
+            self.color = (206, 252, 3)
+        elif self.hp  <= 20:
+            self.color =(252, 252, 3)
+        elif self.hp  <= 25:
+            self.color = (252, 211, 3)
+        elif self.hp  <= 30:
+            self.color = (252, 152, 3)
+        elif self.hp  <= 35:
+            self.color =(252, 115, 3)
+        elif self.hp  <= 40:
+            self.color =(252, 86, 3)
+        elif self.hp  <= 45:
+            self.color =(252, 61, 3)
+        elif self.hp  <= 50:
+            self.color = (252, 3, 3)
+        elif self.hp  <= 55:
+            self.color = (163, 5, 5)
+        elif self.hp  <= 60:
+            self.color = (87, 2, 2)
+        elif self.hp  <= 65:
+            self.color = (43, 0, 0)
+        elif self.hp  <= 70:
+            self.color = (0, 0, 0)
+            
 class Line(pygame.sprite.Sprite):
      def __init__(self, color, width, height,hp):
         super().__init__()
@@ -164,10 +221,29 @@ all_horizontal_list = pygame.sprite.Group()
  
 
 carryOn = True
+#-----starting blocks
 
-block = Block(WHITE,50,50,1)
-block.rect.x = 300
-block.rect.y = 100
+row_1 = random.sample(range(10),4)
+row_2 = random.sample(range(10),4)
+row_3 = random.sample(range(10),4)
+for i in row_1: 
+    block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+    block.rect.x = (SCREEN_WIDTH/10) * i
+    block.rect.y = (SCREEN_WIDTH/10)
+    all_blocks_list.add(block)
+
+for i in row_2: 
+    block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+    block.rect.x = (SCREEN_WIDTH/10) * i
+    block.rect.y = (SCREEN_WIDTH/10) * 2
+    all_blocks_list.add(block)
+
+for i in row_3: 
+    block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+    block.rect.x = (SCREEN_WIDTH/10) * i
+    block.rect.y = (SCREEN_WIDTH/10) * 3
+    all_blocks_list.add(block)
+    
 all_blocks_list.add(block)
 
 clock = pygame.time.Clock()
@@ -266,8 +342,8 @@ while carryOn:
         hit.hp = hit.hp -1
         if hit.hp <=0:
             hit.kill()
-        print(hit.hp)
-    
+        hit.update_color_num(hit.hp)
+            
     screen.fill(BLACK)
     
 
