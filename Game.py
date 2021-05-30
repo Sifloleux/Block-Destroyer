@@ -25,14 +25,6 @@ num_of_balls = 1
 block_update_time = 0
 shot_already = 0
 difficulty = 1
-game_map = [[0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],]
 
 
 def loadImage(name, useColorKey=False):
@@ -72,33 +64,38 @@ def add_ball(mouse_position, SHOOTING_SPEED,starting_point):
 
 
 
-def add_block_line(game_map,SCREEN_WIDTH,difficulty):
-    for i in range(difficulty):
-        
-        if difficulty < 5:
+def add_block_line(SCREEN_WIDTH,difficulty):
+        if difficulty <= 5:
             samples = random.sample(range(10),3)
             for i in samples:   
-                print(i)
-                print('')
-                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
+                print(samples)
+                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
                 all_blocks_list.add(block)
-        elif difficulty < 15 and difficulty > 5 :
-            samples = random.sample(range(10),5)
+        elif difficulty <= 15 and difficulty > 5 :
+            print(difficulty)
+            samples = random.sample(range(10),4)
             for i in samples:       
-                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
+                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
                 all_blocks_list.add(block)
-        elif difficulty < 25 and difficulty > 15 :
-            samples = random.sample(range(10),7)
+        elif difficulty <= 25 and difficulty > 15 :
+            print(difficulty)
+            samples = random.sample(range(10),6)
             for i in samples: 
-                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
+                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
                 all_blocks_list.add(block)
-                
+        else:
+            samples = random.sample(range(10),8)
+            for i in samples: 
+                block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+                block.rect.x = (SCREEN_WIDTH/10) * i
+                block.rect.y = 1
+                all_blocks_list.add(block)
     
 #------------------------------------CLASSES----------------------------------  
     
@@ -211,8 +208,7 @@ while carryOn:
             mouse_x, mouse_y = event.pos             
             draw_line = 1
             shoot = 1
-            all_balls_list.draw(screen)  
-            pygame.display.flip()
+
                                    
         elif event.type == pygame.MOUSEMOTION:
             if mouse_draging:
@@ -225,9 +221,9 @@ while carryOn:
             all_blocks_list.update()
             all_horizontal_list.update()
             all_vertical_list.update()
-            shot_already = 0
+            add_block_line(SCREEN_WIDTH,difficulty)
+            shot_already = 0           
             
-            add_block_line(game_map,SCREEN_WIDTH,difficulty)
             
     all_balls_list.update()
     
