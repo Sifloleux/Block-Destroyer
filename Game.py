@@ -66,7 +66,7 @@ class Ball(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.velocity[0]
         self.rect.y += self.velocity[1]
-        if self.rect.bottom >= SCREEN_HEIGHT - 55:
+        if self.rect.bottom >= SCREEN_HEIGHT - 50:
             self.kill()
 
 #----------------------------
