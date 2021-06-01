@@ -118,6 +118,48 @@ class Ball(pygame.sprite.Sprite):
         if self.rect.bottom >= SCREEN_HEIGHT - 50:
             self.kill()
 
+
+
+
+          
+class ver_Line(pygame.sprite.Sprite):
+     def __init__(self, color,hp):
+        super().__init__()
+        self.hp = hp
+        self.font = pygame.font.SysFont('Arial', 25)
+        self.image = pygame.Surface([SCREEN_WIDTH/10, 36])
+        self.image.fill(BLACK)
+        self.image.set_colorkey(BLACK)
+        pygame.draw.rect(self.image, RED, [0, 0, SCREEN_WIDTH/10, 36])   
+        self.rect = self.image.get_rect()
+        #self.rect.bottom.
+    
+     def update(self):
+         self.rect.y += BLOCK_MOVEMENT
+         if self.hp <=0:
+             self.kill()
+             
+
+          
+class hor_Line(pygame.sprite.Sprite):
+     def __init__(self, color,hp):
+        super().__init__()
+        self.hp = hp
+        self.font = pygame.font.SysFont('Arial', 25)
+        self.image = pygame.Surface([36, SCREEN_WIDTH/10])
+        self.image.fill(BLACK)
+        self.image.set_colorkey(BLACK)
+        pygame.draw.rect(self.image, RED, [0, 0, 36, SCREEN_WIDTH/10])   
+        self.rect = self.image.get_rect()
+        #self.rect.bottom.
+    
+     def update(self):
+         self.rect.y += BLOCK_MOVEMENT
+         if self.hp <=0:
+             self.kill()
+             
+
+
 class Block(pygame.sprite.Sprite):
     
     def __init__(self, color, width, height,hp):
@@ -208,29 +250,7 @@ class Block(pygame.sprite.Sprite):
         elif hp > 70:
             pygame.draw.rect(self.image, (73, 1, 1), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
             
- 
-  
-
-
           
-class Line(pygame.sprite.Sprite):
-     def __init__(self, color, width, height,hp):
-        super().__init__()
-        self.image = pygame.Surface([width, height])
-        self.image.fill(BLACK)
-        self.image.set_colorkey(BLACK)
-        pygame.draw.rect(self.image, color, [0, 0, width, height],3)        
-        self.rect = self.image.get_rect()
-        #self.rect.bottom.
-    
-     def update(self):
-         self.rect.y += BLOCK_MOVEMENT
-         if self.hp <=0:
-             self.kill()
-             
-             
-             
-             
 #----------------------------
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -239,8 +259,19 @@ all_balls_list = pygame.sprite.Group()
 all_blocks_list = pygame.sprite.Group()
 all_vertical_list = pygame.sprite.Group()
 all_horizontal_list = pygame.sprite.Group()
+destroyed = pygame.sprite.Group()
 
 
+line_1 = hor_Line((100,150,200),1)
+line_1.rect.x = 0
+line_1.rect.y = (SCREEN_WIDTH/10)
+
+line_2 = ver_Line((100,150,200),1)
+line_2.rect.x = (SCREEN_WIDTH/10) 
+line_2.rect.y = SCREEN_WIDTH/10 - 1 
+
+all_vertical_list.add(line_2)
+all_vertical_list.add(line_1)
 
 carryOn = True
 #-----starting blocks
@@ -364,12 +395,18 @@ while carryOn:
     for hit in pygame.sprite.groupcollide(all_blocks_list,all_balls_list,0,0):
         hit.hp = hit.hp -1
         if hit.hp <=0:
+            destroyed.add(hit)
+            for coliding_border in pygame.sprite.groupcollide(all_vertical_list,destroyed,0,0):
+                coliding_border.kill()
+                destroyed.empty()
             hit.kill()
         hit.update_color_num(hit.hp)
             
     screen.fill(BLACK)
+    all_vertical_list.draw(screen)
     all_balls_list.draw(screen) 
     all_blocks_list.draw(screen)
+    
     
     for i in all_blocks_list:
         i.addHP(screen,i.hp,i.rect.left+27 ,i.rect.top+25)
