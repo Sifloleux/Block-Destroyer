@@ -148,11 +148,11 @@ class Block(pygame.sprite.Sprite):
         elif hp <= 55:
             pygame.draw.rect(self.image, (163, 5, 5), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
         elif hp <= 60:
-            pygame.draw.rect(self.image, (87, 2, 2), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+            pygame.draw.rect(self.image, (127, 2, 2), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
         elif hp <= 65:
-            pygame.draw.rect(self.image, (43, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+            pygame.draw.rect(self.image, (103, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
         elif hp <= 70:
-            pygame.draw.rect(self.image, (0, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+            pygame.draw.rect(self.image, (83, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
 
         self.rect = self.image.get_rect()
         #self.rect.bottom.
@@ -164,33 +164,33 @@ class Block(pygame.sprite.Sprite):
              
     def update_color_num(self,hp):
         if hp <= 5:
-            self.color = (11, 252, 3)
-        elif hp  <= 10:
-            self.color = (115, 252, 3)
-        elif hp  <= 15:
-            self.color = (206, 252, 3)
-        elif self.hp  <= 20:
-            self.color =(252, 252, 3)
-        elif self.hp  <= 25:
-            self.color = (252, 211, 3)
-        elif self.hp  <= 30:
-            self.color = (252, 152, 3)
-        elif self.hp  <= 35:
-            self.color =(252, 115, 3)
-        elif self.hp  <= 40:
-            self.color =(252, 86, 3)
-        elif self.hp  <= 45:
-            self.color =(252, 61, 3)
-        elif self.hp  <= 50:
-            self.color = (252, 3, 3)
-        elif self.hp  <= 55:
-            self.color = (163, 5, 5)
-        elif self.hp  <= 60:
-            self.color = (87, 2, 2)
-        elif self.hp  <= 65:
-            self.color = (43, 0, 0)
-        elif self.hp  <= 70:
-            self.color = (0, 0, 0)
+            pygame.draw.rect(self.image, (11, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 10:
+            pygame.draw.rect(self.image, (115, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 15:
+            pygame.draw.rect(self.image, (206, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 20:
+            pygame.draw.rect(self.image, (252, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 25:
+            pygame.draw.rect(self.image, (252, 211, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 30:
+            pygame.draw.rect(self.image, (252, 152, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 35:
+            pygame.draw.rect(self.image, (252, 115, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 40:
+            pygame.draw.rect(self.image, (252, 86, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 45:
+            pygame.draw.rect(self.image, (252, 61, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 50:
+            pygame.draw.rect(self.image, (252, 3, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 55:
+            pygame.draw.rect(self.image, (163, 5, 5), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 60:
+            pygame.draw.rect(self.image, (127, 2, 2), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 65:
+            pygame.draw.rect(self.image, (103, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp <= 70:
+            pygame.draw.rect(self.image, (83, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
             
 class Line(pygame.sprite.Sprite):
      def __init__(self, color, width, height,hp):
