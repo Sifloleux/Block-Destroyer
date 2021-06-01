@@ -14,6 +14,8 @@ FPS = 60
 SHOOTING_SPEED = 16
 SPEED = [0, 0]
 BLOCK_MOVEMENT = SCREEN_WIDTH/10
+MENU_BAR_HEIGHT = 655
+
 
 starting_point = [SCREEN_WIDTH/2,SCREEN_HEIGHT-60]
 draw_line = 0
@@ -24,7 +26,7 @@ shoot = 0
 num_of_balls = 1
 block_update_time = 0
 shot_already = 0
-difficulty = 1
+difficulty = 4
 
 
 def loadImage(name, useColorKey=False):
@@ -66,7 +68,6 @@ def add_ball(mouse_position, SHOOTING_SPEED,starting_point):
 
 def add_block_line(SCREEN_WIDTH,difficulty):
         if difficulty <= 5:
-            print(difficulty)
             samples = random.sample(range(10),3)
             for i in samples:   
                 block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
@@ -83,14 +84,14 @@ def add_block_line(SCREEN_WIDTH,difficulty):
                 all_blocks_list.add(block)
         elif difficulty <= 25 and difficulty > 15 :
             print(difficulty)
-            samples = random.sample(range(10),6)
+            samples = random.sample(range(10),5)
             for i in samples: 
                 block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
                 all_blocks_list.add(block)
         else:
-            samples = random.sample(range(10),8)
+            samples = random.sample(range(10),7)
             for i in samples: 
                 block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
@@ -160,7 +161,7 @@ class Block(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         #self.rect.bottom.
     
-    def addText(self,screen,hp,x,y):
+    def addHP(self,screen,hp,x,y):
         if hp >50:
             font = pygame.font.SysFont('Arial', 25)
             text = font.render(f'{hp}', True, WHITE) 
@@ -243,18 +244,23 @@ all_horizontal_list = pygame.sprite.Group()
 
 carryOn = True
 #-----starting blocks
-
+row_0 = random.sample(range(10),4)
 row_1 = random.sample(range(10),4)
 row_2 = random.sample(range(10),4)
 row_3 = random.sample(range(10),4)
+for i in row_0: 
+    block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,4)
+    block.rect.x = (SCREEN_WIDTH/10) * i
+    block.rect.y = 0
+    all_blocks_list.add(block)
 for i in row_1: 
-    block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+    block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,3)
     block.rect.x = (SCREEN_WIDTH/10) * i
     block.rect.y = (SCREEN_WIDTH/10)
     all_blocks_list.add(block)
 
 for i in row_2: 
-    block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+    block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,2)
     block.rect.x = (SCREEN_WIDTH/10) * i
     block.rect.y = (SCREEN_WIDTH/10) * 2
     all_blocks_list.add(block)
@@ -265,7 +271,7 @@ for i in row_3:
     block.rect.y = (SCREEN_WIDTH/10) * 3
     all_blocks_list.add(block)
     
-all_blocks_list.add(block)
+
 
 clock = pygame.time.Clock()
  
@@ -302,18 +308,26 @@ while carryOn:
                 
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_draging = True
-            mouse_x, mouse_y = event.pos             
-            draw_line = 1
-            shoot = 1
+            mouse_x, mouse_y = event.pos
+            if mouse_y <MENU_BAR_HEIGHT:          
+                draw_line = 1
+                shoot = 1
 
                                    
         elif event.type == pygame.MOUSEMOTION:
             if mouse_draging:
                 mouse_x, mouse_y = event.pos
-                y[0] = mouse_x
-                y[1] = mouse_y
-                draw_line = 1
+                if mouse_y <MENU_BAR_HEIGHT:   
+                    y[0] = mouse_x
+                    y[1] = mouse_y
+                    draw_line = 1
                 
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
+            m_x,m_y = event.pos      
+            if m_y > MENU_BAR_HEIGHT and m_x> MENU_BAR_HEIGHT: 
+                for ball in all_balls_list:
+                    ball.velocity = [ball.velocity[0] *1.5,ball.velocity[1] *1.5]
+                    
         if shot_already == 1 and not all_balls_list:
             all_blocks_list.update()
             all_horizontal_list.update()
@@ -326,22 +340,10 @@ while carryOn:
     
     
     
-    
-    
-    
-    
-    
     if not all_balls_list and block_update_time ==1: 
         all_blocks_list.update()
         all_horizontal_list.update()
         all_vertical_list.update()
-    
- 
-    
- 
-    
- 
- 
     
 
     for obj in all_balls_list:
@@ -370,7 +372,7 @@ while carryOn:
     all_blocks_list.draw(screen)
     
     for i in all_blocks_list:
-        i.addText(screen,i.hp,i.rect.left+27 ,i.rect.top+25)
+        i.addHP(screen,i.hp,i.rect.left+27 ,i.rect.top+25)
     pygame.draw.rect(screen, RED, [x[0]-10,x[1]-10,17,17])
     #if not all_balls_list:
     #if not all_blocks_list:
@@ -380,9 +382,14 @@ while carryOn:
 
     if draw_line == 1:
         pygame.draw.line(screen, (200,200,200), starting_point,[mouse_x, mouse_y])
-    pygame.draw.line(screen,WHITE,[0,655],[SCREEN_WIDTH,655],2)
+    pygame.draw.line(screen,WHITE,[0,MENU_BAR_HEIGHT],[SCREEN_WIDTH,MENU_BAR_HEIGHT],2)
+    
+    menu_height = SCREEN_HEIGHT - MENU_BAR_HEIGHT
+    #fat-forward - button
+    pygame.draw.rect(screen, RED, (SCREEN_WIDTH-(SCREEN_HEIGHT - MENU_BAR_HEIGHT),MENU_BAR_HEIGHT+4,menu_height-4,menu_height-8))
     pygame.display.flip()
-
+                
+    
     clock.tick(60)
  
 
