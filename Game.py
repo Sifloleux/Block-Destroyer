@@ -122,11 +122,12 @@ class Block(pygame.sprite.Sprite):
     def __init__(self, color, width, height,hp):
         super().__init__()
         self.hp = hp
+        self.font = pygame.font.SysFont('Arial', 25)
         self.image = pygame.Surface([width, height])
         self.image.fill(BLACK)
         self.image.set_colorkey(BLACK)
         if hp <= 5:
-            pygame.draw.rect(self.image, (11, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+            pygame.draw.rect(self.image, (11, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])                 
         elif hp <= 10:
             pygame.draw.rect(self.image, (115, 252, 3), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
         elif hp <= 15:
@@ -153,9 +154,21 @@ class Block(pygame.sprite.Sprite):
             pygame.draw.rect(self.image, (103, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
         elif hp <= 70:
             pygame.draw.rect(self.image, (83, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp > 70:
+            pygame.draw.rect(self.image, (73, 1, 1), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
 
         self.rect = self.image.get_rect()
         #self.rect.bottom.
+    
+    def addText(self,screen,hp,x,y):
+        if hp >50:
+            font = pygame.font.SysFont('Arial', 25)
+            text = font.render(f'{hp}', True, WHITE) 
+            screen.blit(text,(x , y))
+        else:
+            font = pygame.font.SysFont('Arial', 25)
+            text = font.render(f'{hp}', True, BLACK) 
+            screen.blit(text,(x , y))
     
     def update(self):
         self.rect.y += BLOCK_MOVEMENT
@@ -191,7 +204,14 @@ class Block(pygame.sprite.Sprite):
             pygame.draw.rect(self.image, (103, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
         elif hp <= 70:
             pygame.draw.rect(self.image, (83, 0, 0), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
+        elif hp > 70:
+            pygame.draw.rect(self.image, (73, 1, 1), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
             
+ 
+  
+
+
+          
 class Line(pygame.sprite.Sprite):
      def __init__(self, color, width, height,hp):
         super().__init__()
@@ -218,7 +238,8 @@ all_balls_list = pygame.sprite.Group()
 all_blocks_list = pygame.sprite.Group()
 all_vertical_list = pygame.sprite.Group()
 all_horizontal_list = pygame.sprite.Group()
- 
+
+
 
 carryOn = True
 #-----starting blocks
@@ -345,12 +366,17 @@ while carryOn:
         hit.update_color_num(hit.hp)
             
     screen.fill(BLACK)
-    
-
     all_balls_list.draw(screen) 
-    all_blocks_list.draw(screen) 
-    pygame.draw.circle(screen, RED, [x[0],x[1]],5)
+    all_blocks_list.draw(screen)
+    
+    for i in all_blocks_list:
+        i.addText(screen,i.hp,i.rect.left+27 ,i.rect.top+25)
+    pygame.draw.rect(screen, RED, [x[0]-10,x[1]-10,17,17])
     #if not all_balls_list:
+    #if not all_blocks_list:
+        
+        
+
 
     if draw_line == 1:
         pygame.draw.line(screen, (200,200,200), starting_point,[mouse_x, mouse_y])
