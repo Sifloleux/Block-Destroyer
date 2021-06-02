@@ -73,7 +73,29 @@ def add_block_line(SCREEN_WIDTH,difficulty):
                 block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
+                
+                line_a = hor_Line(RED, 1)
+                line_a.rect.x = (SCREEN_WIDTH/10) * i 
+                line_a.rect.y = 1
+                
+                line_b = hor_Line(RED, 1)
+                line_b.rect.x = (SCREEN_WIDTH/10) * i 
+                line_b.rect.y = (SCREEN_WIDTH/10) - 2
+                
+                line_c = ver_Line(RED, 1)
+                line_c.rect.x = (SCREEN_WIDTH/10) * i -1
+                line_c.rect.y = 1
+                
+                line_d = ver_Line(RED, 1)
+                line_d.rect.x = (SCREEN_WIDTH/10) * (i+1) -2
+                line_d.rect.y = 1
+                
+                all_vertical_list.add(line_c)
+                all_vertical_list.add(line_d)
+                all_horizontal_list.add(line_a)
+                all_horizontal_list.add(line_b)
                 all_blocks_list.add(block)
+                
         elif difficulty <= 15 and difficulty > 5 :
             print(difficulty)
             samples = random.sample(range(10),4)
@@ -81,7 +103,29 @@ def add_block_line(SCREEN_WIDTH,difficulty):
                 block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
+                
+                line_a = hor_Line(RED, 1)
+                line_a.rect.x = (SCREEN_WIDTH/10) * i 
+                line_a.rect.y = 1
+                
+                line_b = hor_Line(RED, 1)
+                line_b.rect.x = (SCREEN_WIDTH/10) * i 
+                line_b.rect.y = (SCREEN_WIDTH/10) - 2
+                
+                line_c = ver_Line(RED, 1)
+                line_c.rect.x = (SCREEN_WIDTH/10) * i -1
+                line_c.rect.y = 1
+                
+                line_d = ver_Line(RED, 1)
+                line_d.rect.x = (SCREEN_WIDTH/10) * (i+1) -2
+                line_d.rect.y = 1
+                
+                all_vertical_list.add(line_c)
+                all_vertical_list.add(line_d)
+                all_horizontal_list.add(line_a)
+                all_horizontal_list.add(line_b)
                 all_blocks_list.add(block)
+                
         elif difficulty <= 25 and difficulty > 15 :
             print(difficulty)
             samples = random.sample(range(10),5)
@@ -89,6 +133,27 @@ def add_block_line(SCREEN_WIDTH,difficulty):
                 block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
+                
+                line_a = hor_Line(RED, 1)
+                line_a.rect.x = (SCREEN_WIDTH/10) * i 
+                line_a.rect.y = 1
+                
+                line_b = hor_Line(RED, 1)
+                line_b.rect.x = (SCREEN_WIDTH/10) * i 
+                line_b.rect.y = (SCREEN_WIDTH/10) - 2
+                
+                line_c = ver_Line(RED, 1)
+                line_c.rect.x = (SCREEN_WIDTH/10) * i -1
+                line_c.rect.y = 1
+                
+                line_d = ver_Line(RED, 1)
+                line_d.rect.x = (SCREEN_WIDTH/10) * (i+1) -2
+                line_d.rect.y = 1
+                
+                all_vertical_list.add(line_c)
+                all_vertical_list.add(line_d)
+                all_horizontal_list.add(line_a)
+                all_horizontal_list.add(line_b)
                 all_blocks_list.add(block)
         else:
             samples = random.sample(range(10),7)
@@ -96,6 +161,27 @@ def add_block_line(SCREEN_WIDTH,difficulty):
                 block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,difficulty)
                 block.rect.x = (SCREEN_WIDTH/10) * i
                 block.rect.y = 1
+                
+                line_a = hor_Line(RED, 1)
+                line_a.rect.x = (SCREEN_WIDTH/10) * i 
+                line_a.rect.y = 1
+                
+                line_b = hor_Line(RED, 1)
+                line_b.rect.x = (SCREEN_WIDTH/10) * i 
+                line_b.rect.y = (SCREEN_WIDTH/10) - 2
+                
+                line_c = ver_Line(RED, 1)
+                line_c.rect.x = (SCREEN_WIDTH/10) * i -1
+                line_c.rect.y = 1
+                
+                line_d = ver_Line(RED, 1)
+                line_d.rect.x = (SCREEN_WIDTH/10) * (i+1) -2
+                line_d.rect.y = 1
+                
+                all_vertical_list.add(line_c)
+                all_vertical_list.add(line_d)
+                all_horizontal_list.add(line_a)
+                all_horizontal_list.add(line_b)
                 all_blocks_list.add(block)
     
 #------------------------------------CLASSES----------------------------------  
@@ -122,15 +208,15 @@ class Ball(pygame.sprite.Sprite):
 
 
           
-class ver_Line(pygame.sprite.Sprite):
+class hor_Line(pygame.sprite.Sprite):
      def __init__(self, color,hp):
         super().__init__()
         self.hp = hp
         self.font = pygame.font.SysFont('Arial', 25)
-        self.image = pygame.Surface([SCREEN_WIDTH/10, 36])
+        self.image = pygame.Surface([SCREEN_WIDTH/10, 2])
         self.image.fill(BLACK)
         self.image.set_colorkey(BLACK)
-        pygame.draw.rect(self.image, RED, [0, 0, SCREEN_WIDTH/10, 36])   
+        pygame.draw.rect(self.image, WHITE, [0, 0, SCREEN_WIDTH/10, 2])   
         self.rect = self.image.get_rect()
         #self.rect.bottom.
     
@@ -141,15 +227,15 @@ class ver_Line(pygame.sprite.Sprite):
              
 
           
-class hor_Line(pygame.sprite.Sprite):
+class ver_Line(pygame.sprite.Sprite):
      def __init__(self, color,hp):
         super().__init__()
         self.hp = hp
         self.font = pygame.font.SysFont('Arial', 25)
-        self.image = pygame.Surface([36, SCREEN_WIDTH/10])
+        self.image = pygame.Surface([2, SCREEN_WIDTH/10 -1])
         self.image.fill(BLACK)
         self.image.set_colorkey(BLACK)
-        pygame.draw.rect(self.image, RED, [0, 0, 36, SCREEN_WIDTH/10])   
+        pygame.draw.rect(self.image, RED, [0, 0, 2, SCREEN_WIDTH/10 -1])   
         self.rect = self.image.get_rect()
         #self.rect.bottom.
     
@@ -250,7 +336,9 @@ class Block(pygame.sprite.Sprite):
         elif hp > 70:
             pygame.draw.rect(self.image, (73, 1, 1), [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])
             
-          
+             
+ 
+    
 #----------------------------
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -260,19 +348,20 @@ all_blocks_list = pygame.sprite.Group()
 all_vertical_list = pygame.sprite.Group()
 all_horizontal_list = pygame.sprite.Group()
 destroyed = pygame.sprite.Group()
+collision_x = pygame.sprite.Group()
+collision_y = pygame.sprite.Group()
 
 
 line_1 = hor_Line((100,150,200),1)
-line_1.rect.x = 0
-line_1.rect.y = (SCREEN_WIDTH/10)
+line_1.rect.x = 1
+line_1.rect.y = 0#(SCREEN_WIDTH/10)-1
 
 line_2 = ver_Line((100,150,200),1)
-line_2.rect.x = (SCREEN_WIDTH/10) 
-line_2.rect.y = SCREEN_WIDTH/10 - 1 
+line_2.rect.x = SCREEN_WIDTH/10 - 2
+line_2.rect.y = 0#SCREEN_WIDTH/10 
 
+all_horizontal_list.add(line_1)
 all_vertical_list.add(line_2)
-all_vertical_list.add(line_1)
-
 carryOn = True
 #-----starting blocks
 row_0 = random.sample(range(10),4)
@@ -387,16 +476,31 @@ while carryOn:
         if obj.rect.y<0:
             obj.velocity[1] = -obj.velocity[1] 
 
-    
+#    for hit in pygame.sprite.groupcollide(all_blocks_list,all_balls_list,0,0):
+            
+#        for ball_col in pygame.sprite.groupcollide(all_balls_list,all_horizontal_list,0,0):
+#            ball_col.velocity[1] = - ball_col.velocity[1]
+#        for ball_col_ in pygame.sprite.groupcollide(all_balls_list,all_vertical_list,0,0):
+#            ball_col_.velocity[0] = - ball_col_.velocity[0]
+        
     for hit in pygame.sprite.groupcollide(all_balls_list,all_blocks_list,0,0):
-        hit.velocity[0] = - hit.velocity[0]
-        hit.velocity[1] = - hit.velocity[1]
+        collision_y.add(hit)
+        collision_x.add(hit)
+        for ball_col in pygame.sprite.groupcollide(collision_y,all_horizontal_list,0,0):
+            hit.velocity[1] = - hit.velocity[1]
+        for ball_col_ in pygame.sprite.groupcollide(collision_x,all_vertical_list,0,0):
+            hit.velocity[0] = - hit.velocity[0]
+        collision_x.empty()
+        collision_y.empty()
+       
         
     for hit in pygame.sprite.groupcollide(all_blocks_list,all_balls_list,0,0):
         hit.hp = hit.hp -1
         if hit.hp <=0:
             destroyed.add(hit)
             for coliding_border in pygame.sprite.groupcollide(all_vertical_list,destroyed,0,0):
+                coliding_border.kill()
+            for coliding_border in pygame.sprite.groupcollide(all_horizontal_list,destroyed,0,0):
                 coliding_border.kill()
                 destroyed.empty()
             hit.kill()
@@ -406,7 +510,7 @@ while carryOn:
     all_vertical_list.draw(screen)
     all_balls_list.draw(screen) 
     all_blocks_list.draw(screen)
-    
+    all_horizontal_list.draw(screen)
     
     for i in all_blocks_list:
         i.addHP(screen,i.hp,i.rect.left+27 ,i.rect.top+25)
