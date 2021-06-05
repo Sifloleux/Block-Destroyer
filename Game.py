@@ -35,14 +35,15 @@ difficulty = 0
 coins = 0
 game_on = 1
 game_on_ = 1
+GAME_TITLE = True
 introduction = False
 introduction1 = False
 main_menu = False
 game_screen = False
 escape_menu = False
 game_over_screen = False
-scoreboard = True
-
+scoreboard = False
+end_of_game = False
 SCORE = 0
 
 EASY = True
@@ -578,8 +579,171 @@ clock = pygame.time.Clock()
 carryOn= True
 while carryOn:
 #---------------------------------------INTRODUCTION-----------------------------------------  
+    if GAME_TITLE:
+        screen.fill(BLACK)      
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT: 
+                  carryOn = False 
+                  
+            elif event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    introduction = True
+                    introduction1 = False
+                    main_menu = False
+                    game_screen = False
+                    escape_menu = False
+                    game_over_screen = False
+                    scoreboard = False
+                    GAME_TITLE = False
+                    
+        pygame.draw.rect(screen, (252, 115, 3), (0,SCREEN_WIDTH/10,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+    
+        text_block1= '31'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block1, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (20,SCREEN_WIDTH/10+20)
+        screen.blit(img, rect)
+        
+        
+        pygame.draw.rect(screen, (252, 86, 3), (7 * SCREEN_WIDTH/10,SCREEN_WIDTH/10,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+    
+        text_block6= '36'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block6, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (7*SCREEN_WIDTH/10+17,SCREEN_WIDTH/10+20)
+        screen.blit(img, rect)
+        pygame.draw.line(screen,WHITE,[0,MENU_BAR_HEIGHT],[SCREEN_WIDTH,MENU_BAR_HEIGHT],2) 
+        pygame.draw.rect(screen, (11, 252, 3), (3 * SCREEN_WIDTH/10,2*SCREEN_WIDTH/10,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+        pygame.draw.rect(screen, RED, (2 * SCREEN_WIDTH/10,2*SCREEN_WIDTH/10,20,20))
+        pygame.draw.rect(screen, RED, (2.5 * SCREEN_WIDTH/10,2.5*SCREEN_WIDTH/10,20,20))
+        pygame.draw.rect(screen, RED, (4.5 * SCREEN_WIDTH/10,2*SCREEN_WIDTH/10-100,20,20))
+        pygame.draw.rect(screen, RED, (7.5 * SCREEN_WIDTH/10,3*SCREEN_WIDTH/10,20,20))
+        pygame.draw.rect(screen, RED, (SCREEN_WIDTH/2-10,MENU_BAR_HEIGHT-10,20,20))
+        pygame.draw.rect(screen, RED, (5.2 * SCREEN_WIDTH/10,3.2*SCREEN_WIDTH/10,20,20))
+        pygame.draw.rect(screen, RED, (6.3 * SCREEN_WIDTH/10,7*SCREEN_WIDTH/10,20,20))
+        pygame.draw.rect(screen, RED, (3.7 * SCREEN_WIDTH/10,5.8*SCREEN_WIDTH/10,20,20))
+        pygame.draw.rect(screen, RED, (1 * SCREEN_WIDTH/10,3*SCREEN_WIDTH/10,20,20))
+        pygame.draw.rect(screen, RED, (1.3 * SCREEN_WIDTH/10,7.8*SCREEN_WIDTH/10,20,20))
+        pygame.draw.rect(screen, RED, (0.2 * SCREEN_WIDTH/10,9*SCREEN_WIDTH/10,20,20))
+        
+        pygame.draw.rect(screen, (11,246,246), (0,250,SCREEN_WIDTH,130))
 
         
+        pygame.draw.line(screen,WHITE,[0,380],[SCREEN_WIDTH,380],2)
+        pygame.draw.line(screen,WHITE,[0,250],[SCREEN_WIDTH,250],2) 
+        
+        text_block2= '5'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block2, True, RED)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = ((SCREEN_WIDTH/2-10,MENU_BAR_HEIGHT+15))
+        screen.blit(img, rect)
+        
+        text_block2= 'Welcome to'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block2, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (260,SCREEN_HEIGHT/2-95)
+        screen.blit(img, rect)
+        
+        text_block2= 'BLOCK DESTROYER'               
+        font = pygame.font.SysFont(None, 90)                
+        img = font.render(text_block2, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (50,SCREEN_HEIGHT/2-45)
+        screen.blit(img, rect)
+        
+        
+        
+        text_block2= '3'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block2, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (3*SCREEN_WIDTH/10+25,SCREEN_WIDTH/10+90)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (206, 252, 3), (4 * SCREEN_WIDTH/10,0,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+        text_block3= '14'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block3, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (4*SCREEN_WIDTH/10+15,20)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (206, 252, 3), (5 * SCREEN_WIDTH/10,0,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+        text_block4= '12'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block4, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (5*SCREEN_WIDTH/10+15,20)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (11, 252, 3), (2 * SCREEN_WIDTH/10,0,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+        text_block5= '4'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block5, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (2*SCREEN_WIDTH/10+25,20)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (11, 252, 3), (2 * SCREEN_WIDTH/10,6 * SCREEN_WIDTH/10,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+        text_block5= '4'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block5, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (2*SCREEN_WIDTH/10+25,6 * SCREEN_WIDTH/10 + 20)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (73, 1, 1), (7 * SCREEN_WIDTH/10,7 * SCREEN_WIDTH/10,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+        text_block5= '81'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block5, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (7*SCREEN_WIDTH/10+20,7 * SCREEN_WIDTH/10 + 20)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (252, 61, 3), (8 * SCREEN_WIDTH/10,6 * SCREEN_WIDTH/10,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+        text_block5= '43'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block5, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (8*SCREEN_WIDTH/10+20,6 * SCREEN_WIDTH/10 + 20)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (163, 5, 5), (8 * SCREEN_WIDTH/10,7 * SCREEN_WIDTH/10,SCREEN_WIDTH/10-1,SCREEN_WIDTH/10-1))
+        text_block5= '51'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_block5, True, BLACK)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (8*SCREEN_WIDTH/10+20,7 * SCREEN_WIDTH/10 + 20)
+        screen.blit(img, rect)
+        
+        text_blo= "PRESS SPACE TO CONTINUE"          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (210,600)
+        screen.blit(img, rect)
+        
+        pygame.display.flip()
+        
+#---------------------------------INTRO--------------------------------------------        
     if introduction:
         screen.fill(BLACK)      
         for event in pygame.event.get(): 
@@ -1405,7 +1569,40 @@ while carryOn:
         screen.blit(img, rect)
         
         pygame.display.flip()
+
         
+
+#----------------------------------EXIT SCREEN------------------
+    if end_of_game:
+        screen.fill(BLACK)
+        
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT: 
+                  carryOn = False 
+                  
+            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                if hover_on_button(195,280,350,80):
+                    carryOn = False 
+
+        text_game_over= 'THANK YOU FOR PLAYING'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (35,SCREEN_HEIGHT/2-220)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (50,50,50), (195,280,350,80))
+        
+        text_game_over= 'EXIT GAME'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (230,300)
+        screen.blit(img, rect)
+        
+        pygame.display.flip()
 #-------------------------------STARTING BLOCKS----------------------------------------
     elif set_first_rows:       
         if EASY:
