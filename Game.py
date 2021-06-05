@@ -31,14 +31,31 @@ num_of_balls = 4
 NUM_of_balls = 4
 block_update_time = 0
 shot_already = 0
-difficulty = 5
+difficulty = 0
 coins = 0
 game_on = 1
 game_on_ = 1
-main_menu = True
+main_menu = False
 game_screen = False
-escape_menu = False
+escape_menu = True
+game_over_screen = False
+EASY = True
+MEDIUM = False
+HARD = False
 
+if EASY:
+    difficulty = 5
+    num_of_balls = 4
+    NUM_of_balls = 4
+elif MEDIUM :
+    difficulty = 8
+    num_of_balls = 4
+    NUM_of_balls = 4
+elif HARD:
+    difficulty = 8
+    num_of_balls = 3
+    NUM_of_balls = 3
+    
 set_first_rows = 1
 
 
@@ -502,8 +519,7 @@ while carryOn:
     
     
     if escape_menu:
-        screen.fill(RED)
-        pygame.display.flip()
+        screen.fill(RED)        
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
                   carryOn = False 
@@ -519,15 +535,66 @@ while carryOn:
                     main_menu = True
                     game_screen = False
                     escape_menu = False
+        text_game_over= 'GAME PAUSED'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-140,SCREEN_HEIGHT/2-300)
+        screen.blit(img, rect)
+        pygame.display.flip()
+                    
+                    
+                    
+    if game_over_screen:
+        screen.fill((120,150,70))
+        
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT: 
+                  carryOn = False 
+                  
+            elif event.type == KEYDOWN:
+                if event.key == K_RETURN:
+                    print('xx')
+                    main_menu = False
+                    game_screen = True
+                    escape_menu = False
+                    
+        text_game_over= 'GAME OVER'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-140,SCREEN_HEIGHT/2-300)
+        
+        screen.blit(img, rect)
+        text_game_over1= f'YOUR SCORE: {NUM_of_balls }'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text_game_over1, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-125,SCREEN_HEIGHT/2-220)
+        screen.blit(img, rect)
+        pygame.display.flip()
+        
+        
+        
+        
     #-----starting blocks
     elif set_first_rows:
+        if EASY:
+            diff_lvl = 4
+        elif MEDIUM:
+            diff_lvl = 7
+        elif HARD:
+            diff_lvl = 7
         row_0 = random.sample(range(10),4)
         row_1 = random.sample(range(10),4)
         row_2 = random.sample(range(10),4)
         row_3 = random.sample(range(10),4)
         
         for i in row_0: 
-            block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,3)
+            block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,diff_lvl-1)
             block.rect.x = (SCREEN_WIDTH/10) * i
             block.rect.y = (SCREEN_WIDTH/10) + 1
             
@@ -554,7 +621,7 @@ while carryOn:
             all_blocks_list.add(block)
             
         for i in row_1: 
-            block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,4)
+            block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,diff_lvl)
             block.rect.x = (SCREEN_WIDTH/10) * i
             block.rect.y = 1
             
@@ -581,7 +648,7 @@ while carryOn:
             all_blocks_list.add(block)
         
         for i in row_2: 
-            block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,2)
+            block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,diff_lvl -2)
             block.rect.x = (SCREEN_WIDTH/10) * i
             block.rect.y = 2*(SCREEN_WIDTH/10) + 1
             
@@ -608,7 +675,7 @@ while carryOn:
             all_blocks_list.add(block)
         
         for i in row_3: 
-            block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,1)
+            block = Block(WHITE,(SCREEN_WIDTH/10)-1,(SCREEN_WIDTH/10)-1,diff_lvl -3)
             block.rect.x = (SCREEN_WIDTH/10) * i
             block.rect.y = 3*(SCREEN_WIDTH/10) + 1
             
@@ -775,8 +842,10 @@ while carryOn:
         for i in all_blocks_list:
             bottom = i.rect.bottom
             if bottom > MENU_BAR_HEIGHT:
-                game_on = 0
-                game_on_ = 0
+                main_menu = False
+                game_screen = False
+                escape_menu = False
+                game_over_screen = True
                 
             
         screen.fill(BLACK)
@@ -789,8 +858,6 @@ while carryOn:
         for i in all_blocks_list:
             i.addHP(screen,i.hp,i.rect.left+27 ,i.rect.top+25)
         pygame.draw.rect(screen, RED, [x[0]-10,x[1]-10,17,17])
-        #if not all_balls_list:
-        #if not all_blocks_list:
             
         text1= f'{NUM_of_balls }'               
         font = pygame.font.SysFont(None, 50)                
