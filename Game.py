@@ -41,9 +41,10 @@ game_screen = False
 escape_menu = False
 game_over_screen = False
 scoreboard = False
-EASY = False
+
+EASY = True
 MEDIUM = False
-HARD = True
+HARD = False
 
 if EASY:
     difficulty = 5
@@ -58,7 +59,7 @@ elif HARD:
     num_of_balls = 3
     NUM_of_balls = 3
     
-set_first_rows = 1
+set_first_rows = 0
 
 set_diff = 1
 
@@ -512,21 +513,7 @@ clock = pygame.time.Clock()
 carryOn= True
 while carryOn:
 #---------------------------------------INTRODUCTION-----------------------------------------  
-    if EASY and set_diff:
-        difficulty = 5
-        num_of_balls = 4
-        NUM_of_balls = 4
-        set_diff = 0
-    elif MEDIUM and set_diff:
-        difficulty = 8
-        num_of_balls = 4
-        NUM_of_balls = 4
-        set_diff = 0
-    elif HARD and set_diff:
-        difficulty = 8
-        num_of_balls = 3
-        NUM_of_balls = 3
-        set_diff = 0
+
         
     if introduction:
         screen.fill(BLACK)      
@@ -709,6 +696,19 @@ while carryOn:
         
 #-----------------------------MAIN MENU SCREEN----------------------------------------------------       
     if main_menu:
+        if EASY:
+            difficulty = 5
+            num_of_balls = 4
+            NUM_of_balls = 4
+        elif MEDIUM :
+            difficulty = 8
+            num_of_balls = 4
+            NUM_of_balls = 4
+        elif HARD:
+            difficulty = 8
+            num_of_balls = 3
+            NUM_of_balls = 3
+    
         screen.fill(BLACK)      
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
@@ -736,26 +736,19 @@ while carryOn:
                     EASY = True
                     MEDIUM = False
                     HARD = False
-                    print(f'e{EASY}')
-                    print(f'm{MEDIUM}')
-                    print(f'h{HARD}')
                     
                 elif hover_on_button(200,300,325,90): #MEDIUM
                     EASY = False
                     MEDIUM = True
                     HARD = False
-                    print(f'e{EASY}')
-                    print(f'm{MEDIUM}')
-                    print(f'h{HARD}')
+                    set_first_rows = 1
                     
                 elif hover_on_button(200,410,325,90): #HARD
                     EASY = False
                     MEDIUM = False
                     HARD = True
-                    print(f'e{EASY}')
-                    print(f'm{MEDIUM}')
-                    print(f'h{HARD}')
-                    
+                    set_first_rows = 1
+            
                 elif hover_on_button(200,530,325,75): #SCOREBOARD
                     main_menu = False
                     game_screen = False
@@ -763,6 +756,7 @@ while carryOn:
                     game_over_screen = False
                     introduction = False
                     scoreboard = True
+                    set_first_rows = 1
                     
                 elif hover_on_button(200,620,325,65):# EXIT 
                     carryOn = False 
@@ -1002,23 +996,7 @@ while carryOn:
         pygame.display.flip()
         
 #-------------------------------STARTING BLOCKS----------------------------------------
-    elif set_first_rows:
-        if EASY and set_diff:
-            difficulty = 5
-            num_of_balls = 4
-            NUM_of_balls = 4
-            set_diff = 0
-        elif MEDIUM and set_diff:
-            difficulty = 8
-            num_of_balls = 4
-            NUM_of_balls = 4
-            set_diff = 0
-        elif HARD and set_diff:
-            difficulty = 8
-            num_of_balls = 3
-            NUM_of_balls = 3
-            set_diff = 0
-        
+    elif set_first_rows:       
         if EASY:
             diff_lvl = 4
         elif MEDIUM:
@@ -1143,21 +1121,6 @@ while carryOn:
 
 #------------------------------------GAME SCREEN------------------------------------    
     elif game_screen:
-        if EASY and set_diff:
-            difficulty = 5
-            num_of_balls = 4
-            NUM_of_balls = 4
-            set_diff = 0
-        elif MEDIUM and set_diff:
-            difficulty = 8
-            num_of_balls = 4
-            NUM_of_balls = 4
-            set_diff = 0
-        elif HARD and set_diff:
-            difficulty = 8
-            num_of_balls = 3
-            NUM_of_balls = 3
-            set_diff = 0
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
                   carryOn = False 
