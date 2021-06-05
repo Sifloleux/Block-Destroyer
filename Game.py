@@ -36,11 +36,14 @@ coins = 0
 game_on = 1
 game_on_ = 1
 introduction = False
-main_menu = True
+introduction1 = False
+main_menu = False
 game_screen = False
 escape_menu = False
 game_over_screen = False
-scoreboard = False
+scoreboard = True
+
+SCORE = 0
 
 EASY = True
 MEDIUM = False
@@ -63,6 +66,68 @@ set_first_rows = 0
 
 set_diff = 1
 
+def reload():
+    SCREEN_WIDTH = 700
+    SCREEN_HEIGHT = 710
+    WHITE = (255, 255, 255)
+    RED   = (255, 0, 0)
+    BLACK = (0, 0, 0)
+    FPS = 60
+    SHOOTING_SPEED = 4
+    SPEED = [0, 0]
+    BLOCK_MOVEMENT = SCREEN_WIDTH/10
+    MENU_BAR_HEIGHT = 655
+    menu_height = SCREEN_HEIGHT - MENU_BAR_HEIGHT
+    
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption('Block Destroyer')
+    
+    starting_point = [SCREEN_WIDTH/2,SCREEN_HEIGHT-60]
+    draw_line = 0
+    x = [SCREEN_WIDTH/2,SCREEN_HEIGHT-60]
+    y=[float('nan'),float('nan')]
+    mouse_draging = False
+    shoot = 0
+    num_of_balls = 4
+    NUM_of_balls = 4
+    block_update_time = 0
+    shot_already = 0
+    difficulty = 0
+    coins = 0
+    game_on = 1
+    game_on_ = 1
+    introduction = False
+    introduction1 = False
+    main_menu = False
+    game_screen = False
+    escape_menu = False
+    game_over_screen = True
+    scoreboard = False
+    
+    SCORE = 0
+    
+    EASY = True
+    MEDIUM = False
+    HARD = False
+    
+    if EASY:
+        difficulty = 5
+        num_of_balls = 4
+        NUM_of_balls = 4
+    elif MEDIUM :
+        difficulty = 8
+        num_of_balls = 4
+        NUM_of_balls = 4
+    elif HARD:
+        difficulty = 8
+        num_of_balls = 3
+        NUM_of_balls = 3
+        
+    set_first_rows = 0
+    
+    set_diff = 1
+    
 def loadImage(name, useColorKey=False):
     fullname = os.path.join("data",name)
     image = pygame.image.load(fullname)  
@@ -523,9 +588,9 @@ while carryOn:
                   
             elif event.type == KEYDOWN:
                 if event.key == K_SPACE:
-                    print('xx')
                     introduction = False
-                    main_menu = True
+                    introduction1 = True
+                    main_menu = False
                     game_screen = False
                     escape_menu = False
                     game_over_screen = False
@@ -689,13 +754,118 @@ while carryOn:
         
         
         
+    if introduction1:
+            
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT: 
+                  carryOn = False 
+                  
+            elif event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    introduction = False
+                    introduction1 = False
+                    main_menu = True
+                    game_screen = False
+                    escape_menu = False
+                    game_over_screen = False
+                    scoreboard = False
+                    
+        pygame.draw.rect(screen, BLACK ,(0,300,SCREEN_WIDTH,400))
+       
         
+       
+        
+        text= '- Collecting points gives you more balls for shooting'              
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,310)
+        screen.blit(img, rect)
+        
+        text_blo= "- Balls will bounce off the walls "          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,350)
+        screen.blit(img, rect)
+        
+        text_blo= "- To speed up the ball flow click the button in bottom-right corner."          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,390)
+        screen.blit(img, rect)
+        
+        text_blo= "  You can speed them up as much sa you want. The speed will be"          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,415)
+        screen.blit(img, rect)
+        
+        
+        text_blo= "  set to default after every new row."          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,440)
+        screen.blit(img, rect)
+        
+        text_blo= ""          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,475)
+        screen.blit(img, rect)
+        
+        text_blo= "  "          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,500)
+        screen.blit(img, rect)
+        
+        text_blo= "  "          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,530)
+        screen.blit(img, rect)
+        
+        text_blo= ""          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,570)
+        screen.blit(img, rect)
+        
+        text_blo= "PRESS SPACE TO CONTINUE"          
+        font = pygame.font.SysFont(None, 30)                
+        img = font.render(text_blo, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (210,660)
+        screen.blit(img, rect)
+        
+        pygame.display.flip()        
         
         
         
         
 #-----------------------------MAIN MENU SCREEN----------------------------------------------------       
     if main_menu:
+        
+        screen.fill(BLACK)  
+
         if EASY:
             difficulty = 5
             num_of_balls = 4
@@ -709,7 +879,8 @@ while carryOn:
             num_of_balls = 3
             NUM_of_balls = 3
     
-        screen.fill(BLACK)      
+    
+   
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
                   carryOn = False 
@@ -731,24 +902,28 @@ while carryOn:
                     escape_menu = False
                     game_over_screen = False
                     scoreboard = False
-                    
+                    set_first_rows = 1
                 elif hover_on_button(200,190,325,90): # EASY
                     EASY = True
                     MEDIUM = False
                     HARD = False
+
                     
                 elif hover_on_button(200,300,325,90): #MEDIUM
                     EASY = False
                     MEDIUM = True
                     HARD = False
-                    set_first_rows = 1
+                    
+                    
+                    pygame.draw.rect(screen, (50,50,50), (200,190,325,90))
                     
                 elif hover_on_button(200,410,325,90): #HARD
                     EASY = False
                     MEDIUM = False
                     HARD = True
-                    set_first_rows = 1
-            
+                    
+                                      
+                    
                 elif hover_on_button(200,530,325,75): #SCOREBOARD
                     main_menu = False
                     game_screen = False
@@ -756,80 +931,222 @@ while carryOn:
                     game_over_screen = False
                     introduction = False
                     scoreboard = True
-                    set_first_rows = 1
+                    
                     
                 elif hover_on_button(200,620,325,65):# EXIT 
                     carryOn = False 
-                    
-        text_continue= 'MAIN MENU'               
-        font = pygame.font.SysFont(None, 70)                
-        img = font.render(text_continue, True, WHITE)                
-        rect = img.get_rect()
-        rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-130,SCREEN_HEIGHT/2-330)
-        screen.blit(img, rect)
-        
-        pygame.draw.rect(screen, (80,80,80), (160,90,400,430))
-        pygame.draw.rect(screen, (50,50,50), (170,100,380,70))
-        text_continue= 'START NEW GAME'               
-        font = pygame.font.SysFont(None, 55)                
-        img = font.render(text_continue, True, WHITE)                
-        rect = img.get_rect()
-        rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-160,120)
-        screen.blit(img, rect)
-        
-        pygame.draw.rect(screen, (50,50,50), (200,190,325,90))
 
-        text_continue= 'EASY'               
-        font = pygame.font.SysFont(None, 70)                
-        img = font.render(text_continue, True, WHITE)                
-        rect = img.get_rect()
-        rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-55,210)
-        screen.blit(img, rect)
-        
-        pygame.draw.rect(screen, (50,50,50), (200,300,325,90))
 
-        text_continue= 'MEDIUM'               
-        font = pygame.font.SysFont(None, 70)                
-        img = font.render(text_continue, True, WHITE)                
-        rect = img.get_rect()
-        rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-85,320)
-        screen.blit(img, rect)
-        
-        pygame.draw.rect(screen, (50,50,50), (200,410,325,90))
 
-        text_continue= 'HARD'               
-        font = pygame.font.SysFont(None, 70)                
-        img = font.render(text_continue, True, WHITE)                
-        rect = img.get_rect()
-        rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-55,440)
-        screen.blit(img, rect)
-        
-        pygame.draw.rect(screen, (50,50,50), (200,530,325,75))
-        
-        text_continue= 'BEST SCORES'               
-        font = pygame.font.SysFont(None, 60)                
-        img = font.render(text_continue, True, WHITE)                
-        rect = img.get_rect()
-        rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-130,550)
-        screen.blit(img, rect)
-        
-        pygame.draw.rect(screen, (50,50,50), (200,620,325,65))
-        
-        text_continue= 'EXIT'               
-        font = pygame.font.SysFont(None, 70)                
-        img = font.render(text_continue, True, WHITE)                
-        rect = img.get_rect()
-        rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-55,630)
-        screen.blit(img, rect)
-        
-        
+        if EASY:
+                         
+            text_continue= 'MAIN MENU'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-130,SCREEN_HEIGHT/2-330)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (80,80,80), (160,90,400,430))
+            pygame.draw.rect(screen, (50,50,50), (170,100,380,70))
+            text_continue= 'START NEW GAME'               
+            font = pygame.font.SysFont(None, 55)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-160,120)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (11,246,246), (200,190,325,90))
+    
+            text_continue= 'EASY'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, BLACK)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,210)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,300,325,90))
+    
+            text_continue= 'MEDIUM'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-85,320)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,410,325,90))
+    
+            text_continue= 'HARD'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,440)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,530,325,75))
+            
+            text_continue= 'BEST SCORES'               
+            font = pygame.font.SysFont(None, 60)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-130,550)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,620,325,65))
+            
+            text_continue= 'EXIT'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,630)
+            screen.blit(img, rect)
+            
+        elif MEDIUM:
+                         
+            text_continue= 'MAIN MENU'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-130,SCREEN_HEIGHT/2-330)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (80,80,80), (160,90,400,430))
+            pygame.draw.rect(screen, (50,50,50), (170,100,380,70))
+            text_continue= 'START NEW GAME'               
+            font = pygame.font.SysFont(None, 55)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-160,120)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,190,325,90))
+    
+            text_continue= 'EASY'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,210)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (11,246,246), (200,300,325,90))
+    
+            text_continue= 'MEDIUM'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, BLACK)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-85,320)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,410,325,90))
+    
+            text_continue= 'HARD'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,440)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,530,325,75))
+            
+            text_continue= 'BEST SCORES'               
+            font = pygame.font.SysFont(None, 60)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-130,550)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,620,325,65))
+            
+            text_continue= 'EXIT'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,630)
+            screen.blit(img, rect)
+        elif HARD:
+                         
+            text_continue= 'MAIN MENU'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-130,SCREEN_HEIGHT/2-330)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (80,80,80), (160,90,400,430))
+            pygame.draw.rect(screen, (50,50,50), (170,100,380,70))
+            text_continue= 'START NEW GAME'               
+            font = pygame.font.SysFont(None, 55)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-160,120)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,190,325,90))
+    
+            text_continue= 'EASY'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,210)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,300,325,90))
+    
+            text_continue= 'MEDIUM'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-85,320)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (11,246,246), (200,410,325,90))
+    
+            text_continue= 'HARD'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, BLACK)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,440)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,530,325,75))
+            
+            text_continue= 'BEST SCORES'               
+            font = pygame.font.SysFont(None, 60)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-130,550)
+            screen.blit(img, rect)
+            
+            pygame.draw.rect(screen, (50,50,50), (200,620,325,65))
+            
+            text_continue= 'EXIT'               
+            font = pygame.font.SysFont(None, 70)                
+            img = font.render(text_continue, True, WHITE)                
+            rect = img.get_rect()
+            rect.size=img.get_size()               
+            rect.topleft = (SCREEN_WIDTH/2-55,630)
+            screen.blit(img, rect)
+            
         pygame.display.flip()
         
         
@@ -854,12 +1171,7 @@ while carryOn:
                     main_menu = False
                     game_screen = True
                     escape_menu = False
-                elif event.key == K_RETURN:
-                    main_menu = True
-                    game_screen = False
-                    escape_menu = False
-                    game_over_screen = False
-                    
+                  
             elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 if hover_on_button(200,260,325,90):
                     main_menu = False
@@ -872,18 +1184,22 @@ while carryOn:
                     game_screen = False
                     escape_menu = False
                     game_over_screen = False
+                    introduction = False
+                    set_first_rows = 0
+                    all_balls_list.empty()
+                    all_blocks_list.empty()
+                    all_vertical_list.empty()
+                    all_horizontal_list.empty()
+                    all_coins_list.empty()
+                    destroyed.empty()
+                    collision_x.empty()
+                    collision_y.empty()
+                    SCORE = 0
+                    reload()
                     
                 elif hover_on_button(200,460,325,110):
-                    main_menu = False
-                    game_screen = False
-                    escape_menu = False
-                    game_over_screen = False
-                    introduction = True
-                    
-                elif hover_on_button(200,570,325,110):
                     carryOn = False 
-
-                    
+                                      
         text_game_paused= 'GAME PAUSED'               
         font = pygame.font.SysFont(None, 70)                
         img = font.render(text_game_paused, True, WHITE)                
@@ -892,7 +1208,7 @@ while carryOn:
         rect.topleft = (SCREEN_WIDTH/2-170,SCREEN_HEIGHT/2-300)
         screen.blit(img, rect)
         
-        text_game_paused= f'SCORE: {num_of_balls}'               
+        text_game_paused= f'SCORE: {SCORE}'               
         font = pygame.font.SysFont(None, 70)                
         img = font.render(text_game_paused, True, WHITE)                
         rect = img.get_rect()
@@ -922,30 +1238,22 @@ while carryOn:
         
         pygame.draw.rect(screen, (50,50,50), (200,460,325,90))
 
-        text_continue= 'INTRODUCTION'               
-        font = pygame.font.SysFont(None, 55)                
+        text_continue= 'EXIT'               
+        font = pygame.font.SysFont(None, 70)                
         img = font.render(text_continue, True, WHITE)                
         rect = img.get_rect()
         rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-135,SCREEN_HEIGHT/2+135)
+        rect.topleft = (SCREEN_WIDTH/2-45,SCREEN_HEIGHT/2+135)
         screen.blit(img, rect)
         
-        pygame.draw.rect(screen, (50,50,50), (200,570,325,90))
 
-        text_continue= 'EXIT'               
-        font = pygame.font.SysFont(None, 80)                
-        img = font.render(text_continue, True, WHITE)                
-        rect = img.get_rect()
-        rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-55,SCREEN_HEIGHT/2+235)
-        screen.blit(img, rect)
         
         pygame.display.flip()
                     
                     
 #-----------------------------GAME OVER SCREEN------------------------------------                    
     if game_over_screen:
-        screen.fill((120,150,70))
+        screen.fill(BLACK)
         
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
@@ -958,41 +1266,144 @@ while carryOn:
                     game_screen = False
                     escape_menu = False
                     game_over_screen = False
+            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                if hover_on_button(100,350,525,90):
+                    introduction = False
+                    main_menu = True
+                    game_screen = False
+                    escape_menu = False
+                    game_over_screen = False
+                    scoreboard = False
+                    set_first_rows = 0
+                    all_balls_list.empty()
+                    all_blocks_list.empty()
+                    all_vertical_list.empty()
+                    all_horizontal_list.empty()
+                    all_coins_list.empty()
+                    destroyed.empty()
+                    collision_x.empty()
+                    collision_y.empty()
+                    SCORE = 0
+                    reload()
+                    
                     
         text_game_over= 'GAME OVER'               
         font = pygame.font.SysFont(None, 70)                
         img = font.render(text_game_over, True, WHITE)                
         rect = img.get_rect()
         rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-140,SCREEN_HEIGHT/2-300)
-        
+        rect.topleft = (SCREEN_WIDTH/2-140,SCREEN_HEIGHT/2-300)       
         screen.blit(img, rect)
-        text_game_over1= f'YOUR SCORE: {NUM_of_balls }'               
+        
+        text_game_over1= f'YOUR SCORE: {SCORE }'               
         font = pygame.font.SysFont(None, 50)                
         img = font.render(text_game_over1, True, WHITE)                
         rect = img.get_rect()
         rect.size=img.get_size()               
         rect.topleft = (SCREEN_WIDTH/2-125,SCREEN_HEIGHT/2-220)
         screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (50,50,50), (100,350,525,90))
+
+        text_continue= 'GO TO MAIN MENU'               
+        font = pygame.font.SysFont(None, 65)                
+        img = font.render(text_continue, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-185,SCREEN_HEIGHT/2+20)
+        screen.blit(img, rect)
+        
         pygame.display.flip()
+        
         
         
         
 # ---------------------------------------SCOREBOARD------------------------------------------------
     if scoreboard:
-        screen.fill((220,150,170))
+        screen.fill(BLACK)
         
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT: 
                   carryOn = False 
                   
-        text_game_over= 'SCOREBOARD'               
+            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                if hover_on_button(195,580,350,80):
+                    introduction = False
+                    main_menu = True
+                    game_screen = False
+                    escape_menu = False
+                    game_over_screen = False
+                    scoreboard = False
+                    
+        text_game_over= 'HIGHSCORES'               
         font = pygame.font.SysFont(None, 70)                
         img = font.render(text_game_over, True, WHITE)                
         rect = img.get_rect()
         rect.size=img.get_size()               
-        rect.topleft = (SCREEN_WIDTH/2-140,SCREEN_HEIGHT/2-300)
+        rect.topleft = (SCREEN_WIDTH/2-150,SCREEN_HEIGHT/2-340)
         screen.blit(img, rect)
+        
+        
+        pygame.draw.rect(screen, (50,50,50), (150,80,425,480))
+        
+        text_game_over= 'EASY'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-60,SCREEN_HEIGHT/2-250)
+        screen.blit(img, rect)
+        
+        text_game_over= '20'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-20,SCREEN_HEIGHT/2-190)
+        screen.blit(img, rect)
+        
+        text_game_over= 'MEDIUM'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-90,SCREEN_HEIGHT/2-100)
+        screen.blit(img, rect)
+        
+        text_game_over= '15'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-20,SCREEN_HEIGHT/2 -40)
+        screen.blit(img, rect)
+        
+        text_game_over= 'HARD'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-65,SCREEN_HEIGHT/2 + 50)
+        screen.blit(img, rect)
+        
+        text_game_over= '10'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (SCREEN_WIDTH/2-20,SCREEN_HEIGHT/2 + 110)
+        screen.blit(img, rect)
+        
+        pygame.draw.rect(screen, (50,50,50), (195,580,350,80))
+        
+        text_game_over= 'MAIN MENU'               
+        font = pygame.font.SysFont(None, 70)                
+        img = font.render(text_game_over, True, WHITE)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (230,600)
+        screen.blit(img, rect)
+        
         pygame.display.flip()
         
 #-------------------------------STARTING BLOCKS----------------------------------------
@@ -1142,7 +1553,6 @@ while carryOn:
                 m_x,m_y = event.pos      
                 if m_y > MENU_BAR_HEIGHT and m_x> MENU_BAR_HEIGHT and event.button == 1: 
                     for ball in all_balls_list:
-                        print('speeding up')
                         ball.velocity = [ball.velocity[0] *1.5,ball.velocity[1] *1.5]
                         
                         
@@ -1199,6 +1609,7 @@ while carryOn:
                 NUM_of_balls = num_of_balls
                 add_block_line(SCREEN_WIDTH,difficulty)
                 difficulty += 1
+                SCORE += 1
                 shot_already = 0           
                 
                 
@@ -1284,11 +1695,17 @@ while carryOn:
         rect.topleft = (SCREEN_WIDTH/2-10,SCREEN_HEIGHT-50)
         screen.blit(img, rect)
         
-        #pygame.display.flip()
+        text2= f'SCORE: {SCORE }'               
+        font = pygame.font.SysFont(None, 50)                
+        img = font.render(text2, True, RED)                
+        rect = img.get_rect()
+        rect.size=img.get_size()               
+        rect.topleft = (10,SCREEN_HEIGHT-40)
+        screen.blit(img, rect)
+
     
     
-        if draw_line == 1:
-            pygame.draw.line(screen, (200,200,200), starting_point,[mouse_x, mouse_y])
+
         pygame.draw.line(screen,WHITE,[0,MENU_BAR_HEIGHT],[SCREEN_WIDTH,MENU_BAR_HEIGHT],2)
         
         
@@ -1301,7 +1718,7 @@ while carryOn:
     elif game_on ==0:
         
         screen.fill(BLACK)
-        text2= f'GAME OVER SCORE:{NUM_of_balls}'               
+        text2= f'GAME OVER SCORE:{SCORE}'               
         font = pygame.font.SysFont(None, 50)                
         img = font.render(text2, True, RED)                
         rect = img.get_rect()
