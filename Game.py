@@ -36,11 +36,11 @@ difficulty = 0
 coins = 0
 game_on = 1
 game_on_ = 1
-GAME_TITLE = True
+GAME_TITLE = False
 introduction = False
 introduction1 = False
 main_menu = False
-game_screen = False
+game_screen = True
 escape_menu = False
 game_over_screen = False
 scoreboard = False
@@ -567,10 +567,13 @@ class Coin(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image.fill(BLACK)
         self.image.set_colorkey(BLACK)
-        
-        
-        pygame.draw.rect(self.image, WHITE, [0, 0, SCREEN_WIDTH/10, SCREEN_WIDTH/10])                 
+                
+        pygame.draw.circle(self.image, (250,250,86), (SCREEN_WIDTH/20, SCREEN_WIDTH/20),32)   
+        pygame.draw.circle(self.image, (235,235,86), (SCREEN_WIDTH/20, SCREEN_WIDTH/20),28)                    
+        pygame.draw.circle(self.image, (250,250,86), (SCREEN_WIDTH/20, SCREEN_WIDTH/20),25) 
+        pygame.draw.circle(self.image, (235,235,86), (SCREEN_WIDTH/20, SCREEN_WIDTH/20),12)                   
        
+
 
         self.rect = self.image.get_rect()
         #self.rect.bottom.
