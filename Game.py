@@ -36,11 +36,11 @@ difficulty = 0
 coins = 0
 game_on = 1
 game_on_ = 1
-GAME_TITLE = False
+GAME_TITLE = True
 introduction = False
 introduction1 = False
 main_menu = False
-game_screen = True
+game_screen = False
 escape_menu = False
 game_over_screen = False
 scoreboard = False
@@ -175,9 +175,7 @@ def get_speed(starting_point,pointer_point):
 
 
 
-def read_highscore(lvl):
-    print('1')
-    
+
     
     
     
@@ -1936,10 +1934,8 @@ while carryOn:
             collision_x.add(hit)
             for ball_col in pygame.sprite.groupcollide(collision_y,all_horizontal_list,0,0):
                 hit.velocity[1] = - hit.velocity[1]
-                print('1')
             for ball_col_ in pygame.sprite.groupcollide(collision_x,all_vertical_list,0,0):
                 hit.velocity[0] = - hit.velocity[0]
-                print('1')
             collision_x.empty()
             collision_y.empty()
            
@@ -2038,8 +2034,12 @@ while carryOn:
         pygame.draw.line(screen,WHITE,[0,MENU_BAR_HEIGHT],[SCREEN_WIDTH,MENU_BAR_HEIGHT],2)
         
         
-        #fat-forward - button
+        #fast-forward - button
+        
         pygame.draw.rect(screen, MENU_COLOR, (SCREEN_WIDTH-(SCREEN_HEIGHT - MENU_BAR_HEIGHT),MENU_BAR_HEIGHT+4,menu_height-4,menu_height-8))
+        pygame.draw.line(screen,BLACK,[655,666],[655,700],6)
+        pygame.draw.line(screen,BLACK,[653,666],[690,683],6)
+        pygame.draw.line(screen,BLACK,[653,700],[690,683],6)
         pygame.display.flip()
         
 #-------------------------------------
