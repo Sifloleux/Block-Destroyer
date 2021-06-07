@@ -142,14 +142,6 @@ def reload():
     
     set_diff = 1
     
-def loadImage(name, useColorKey=False):
-    fullname = os.path.join("data",name)
-    image = pygame.image.load(fullname)  
-    image = image.convert() 
-    if useColorKey is True:
-        colorkey = image.get_at((0,0)) 
-        image.set_colorkey(colorkey,RLEACCEL) 
-    return image
 
 def loadSound(name):
     fullname = os.path.join("data",name)
@@ -170,17 +162,7 @@ def get_speed(starting_point,pointer_point):
     else:
         speed=[0,1]
     return speed
-
-
-
-
-
-
-    
-    
-    
-    
-    
+   
 def add_ball(mouse_position, SHOOTING_SPEED,starting_point):
     speed = get_speed(starting_point,mouse_position)
     ball1 = Ball(MENU_COLOR,20,20,[SHOOTING_SPEED*speed[0],SHOOTING_SPEED*speed[1]])
@@ -958,6 +940,14 @@ while carryOn:
                     escape_menu = False
                     game_over_screen = False
                     scoreboard = False
+                elif event.key == K_ESCAPE:
+                    introduction = True
+                    introduction1 = False
+                    main_menu = False
+                    game_screen = False
+                    escape_menu = False
+                    game_over_screen = False
+                    scoreboard = False
                     
         pygame.draw.rect(screen, BLACK ,(0,300,SCREEN_WIDTH,400))
        
@@ -1029,12 +1019,12 @@ while carryOn:
         rect.topleft = (10,530)
         screen.blit(img, rect)
         
-        text_blo= ""          
+        text_blo= "PRESS ESCAPE TO GO BACK"          
         font = pygame.font.SysFont(None, 30)                
         img = font.render(text_blo, True, WHITE)                
         rect = img.get_rect()
         rect.size=img.get_size()               
-        rect.topleft = (10,570)
+        rect.topleft = (210,620)
         screen.blit(img, rect)
         
         text_blo= "PRESS SPACE TO CONTINUE"          
@@ -2064,7 +2054,7 @@ while carryOn:
                          game_on_ = 1
         if game_on_ ==1:
             game_on =1            
-clock.tick(60)
+clock.tick(120)
  
 
 pygame.quit()
