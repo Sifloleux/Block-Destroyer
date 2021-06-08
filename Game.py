@@ -978,7 +978,7 @@ while carryOn:
         rect.topleft = (10,390)
         screen.blit(img, rect)
         
-        text_blo= "  You can speed them up as much sa you want. The speed will be"          
+        text_blo= "  You can speed them up as much as you want. The speed will be"          
         font = pygame.font.SysFont(None, 30)                
         img = font.render(text_blo, True, WHITE)                
         rect = img.get_rect()
@@ -995,12 +995,12 @@ while carryOn:
         rect.topleft = (10,440)
         screen.blit(img, rect)
         
-        text_blo= ""          
+        text_blo= "- Use mouse to navigate in menu"          
         font = pygame.font.SysFont(None, 30)                
         img = font.render(text_blo, True, WHITE)                
         rect = img.get_rect()
         rect.size=img.get_size()               
-        rect.topleft = (10,475)
+        rect.topleft = (10,480)
         screen.blit(img, rect)
         
         text_blo= "  "          
