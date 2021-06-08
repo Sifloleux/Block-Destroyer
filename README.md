@@ -1,11 +1,14 @@
-# Game Title
-## Author:
+# Block Destroyer
+## Author: Łukasz Serafin
 
 ### Short description
-
+In Block Destroyer your mission is to survive as long as possible. Destroy oncoming blocks and collect 
+coins to increase the number of balls available and break the current highscore on one of three
+difficulty levels available!
 
 ### Technologies
-**name** - description
+**python** - Programming language on which the project is based (version 3.8.8 or later recommended)
+**pygame** - Module used for creating simple games in python
 
 ### How to run this app?
 1. Clone the template project, replacing my-project with the name of the project you are creating: 
