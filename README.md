@@ -7,8 +7,8 @@ Destroy oncoming blocks and collect coins to increase the number of balls availa
 and break the current highscore on one of three difficulty levels available!
 
 ### Technologies
--**python** - Programming language on which the project is based (version 3.8.8 or later recommended)
--**pygame** - Module used for creating simple games in python
+- **Python** - Programming language on which the project is based (version 3.8.8 or later recommended)
+- **Pygame** - Module used for creating simple games in python
 
 ### How to run this app?
 1. Clone the template project, replacing my-project with the name of the project you are creating: 
