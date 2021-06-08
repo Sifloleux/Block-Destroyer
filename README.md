@@ -12,8 +12,8 @@ and break the current highscore on one of three difficulty levels available!
 
 ### How to run this app?
 1. Clone the template project, replacing my-project with the name of the project you are creating: 
-`git clone  https://github.com/github-anki/Game-Template.git my-project`
-`cd my-project `
+`git clone  https://github.com/Sifloleux/Block-Destroyer.git Block-Destroyer`
+`cd Block-Destroyer `
 2. Install the project's development and runtime requirements:
 `pip install -r requirements.txt`
 
