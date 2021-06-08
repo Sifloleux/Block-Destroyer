@@ -16,3 +16,6 @@ and break the current highscore on one of three difficulty levels available!
 `cd my-project `
 2. Install the project's development and runtime requirements:
 `pip install -r requirements.txt`
+
+![](IMG/screen2.png)\
+![](IMG/screen1.png)
